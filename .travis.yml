@@ -62,8 +62,8 @@ jobs:
     script:
     - >
       sshpass -p "$PROD_USER_PASSWORD"
-      scp -P $PROD_SERVER_PORT -r -o StrictHostKeyChecking=no 
-      ./ $PROD_USER_ID@$PROD_SERVER_HOST:/home/boost/server -v
+      scp -v -P $PROD_SERVER_PORT -r -o StrictHostKeyChecking=no 
+      ./ $PROD_USER_ID@$PROD_SERVER_HOST:/home/boost/server
     - >
       sshpass -p "$PROD_USER_PASSWORD"
       ssh -p $PROD_SERVER_PORT -o StrictHostKeyChecking=no 
