@@ -67,9 +67,10 @@ jobs:
     - >
       sshpass -p "$PROD_USER_PASSWORD"
       ssh -p $PROD_SERVER_PORT -o StrictHostKeyChecking=no 
-      $PROD_USER_ID@$PROD_SERVER_HOST "cd server && npm start production"
+      $PROD_USER_ID@$PROD_SERVER_HOST "cd server && npm i && npm start production"
     before_script:
     - cd $TRAVIS_BUILD_DIR/server
+    - rm -rf node_modules
 
   - script:
     - >
@@ -79,11 +80,11 @@ jobs:
     - >
       sshpass -p $PROD_USER_PASSWORD
       ssh -p $PROD_SERVER_PORT -o StrictHostKeyChecking=no 
-      $PROD_USER_ID@$PROD_SERVER_HOST "cd client && npm start"
+      $PROD_USER_ID@$PROD_SERVER_HOST "cd client && npm i && npm start"
     name: "deploy client to release server"
     before_script:
     - cd $TRAVIS_BUILD_DIR/client
-    - npm start build
+    - rm -rf node_modules
 
   - stage: production
     name: "deploy server to production server"
